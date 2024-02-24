@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -121,12 +122,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void validateCredentials(BuildContext context) {
+  void validateCredentials(BuildContext context) async {
     String userName = _userNamefield.text;
     String password = _passwordField.text;
 
     if (userName == 'admin' && password == 'password') {
-      Navigator.pushReplacementNamed(context, '/home');
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('user', true);
+      Navigator.pushReplacementNamed(context, '/add');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
