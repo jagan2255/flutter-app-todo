@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (userName == 'admin' && password == 'password') {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('user', true);
-      Navigator.pushReplacementNamed(context, '/add');
+      Navigator.pushReplacementNamed(context, '/adddata');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
